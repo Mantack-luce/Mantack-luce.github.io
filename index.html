@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>만택루쎄의원 정형외과·재활의학과</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --bg:#eef2f8;
+    --surface:#ffffff;
+    --surface-2:#f4f7fb;
+    --ink:#16233f;
+    --ink-soft:#34445f;
+    --muted:#647186;
+    --line:#dde5f0;
+    --brand:#1a4a8f;
+    --brand-deep:#123566;
+    --brand-soft:#e6edf7;
+    --mint:#4fb6bd;
+    --teal:#0c939a;
+    --teal-deep:#0a7981;
+    --accent:#e0a13c;
+    --shadow:0 18px 50px -28px rgba(9,60,55,.45);
+    --shadow-sm:0 8px 22px -16px rgba(9,60,55,.4);
+    --radius:20px;
+    --maxw:1140px;
+    --nav-h:70px;
+    font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    letter-spacing:-.01em;
+    /* 한국어가 단어 중간에서 잘리지 않고 띄어쓰기 단위로 줄바꿈되도록 */
+    word-break:keep-all;
+    overflow-wrap:break-word;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  button{font-family:inherit;cursor:pointer;border:none;background:none}
+  :focus-visible{outline:2.5px solid var(--brand);outline-offset:3px;border-radius:6px}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky;top:0;z-index:60;
+    height:var(--nav-h);
+    background:rgba(255,255,255,.86);
+    backdrop-filter:saturate(140%) blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav__inner{
+    max-width:var(--maxw);margin:0 auto;height:100%;
+    padding:0 24px;display:flex;align-items:center;gap:24px;
+  }
+  .brand{display:flex;align-items:center;gap:11px;flex-shrink:0}
+  .brand__mark{width:38px;height:38px;flex-shrink:0}
+  .brand__logo{height:44px;width:auto;display:block}
+  .foot-logo{display:inline-block;background:#fff;border-radius:16px;padding:16px 28px}
+  .foot-logo img{height:54px;width:auto;display:block}
+  .brand__name{font-size:1.12rem;font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1.1}
+  .brand__sub{font-size:.66rem;font-weight:600;color:var(--brand);letter-spacing:.06em;margin-top:1px}
+  .nav__links{display:flex;gap:4px;margin-left:auto}
+  .nav__link{
+    padding:9px 15px;border-radius:10px;font-weight:600;font-size:.94rem;color:var(--ink-soft);
+    transition:background .18s,color .18s;
+  }
+  .nav__link:hover{background:var(--brand-soft);color:var(--brand-deep)}
+  .nav__link.is-active{background:var(--brand);color:#fff}
+  .nav__cta{
+    display:inline-flex;align-items:center;gap:7px;
+    padding:10px 18px;border-radius:11px;font-weight:700;font-size:.92rem;
+    background:var(--ink);color:#fff;transition:background .18s,transform .15s;
+  }
+  .nav__cta:hover{background:var(--brand-deep);transform:translateY(-1px)}
+  .nav__toggle{display:none;width:44px;height:44px;margin-left:auto;border-radius:11px}
+  .nav__toggle span{display:block;width:22px;height:2px;background:var(--ink);margin:5px auto;border-radius:2px;transition:.25s}
+
+  /* ---------- VIEWS ---------- */
+  .view{display:none;animation:fade .5s ease}
+  .view.is-active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+  .section{padding:46px 0 76px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:1rem;font-weight:800;letter-spacing:.06em;color:var(--brand);
+    text-transform:uppercase;margin-bottom:14px;
+  }
+  .eyebrow::before{content:"";width:26px;height:3px;background:var(--brand);border-radius:2px;flex-shrink:0}
+  .h-sec{font-size:clamp(1.8rem,3.6vw,2.5rem);font-weight:800;letter-spacing:-.035em;line-height:1.18;color:var(--ink);text-wrap:balance}
+  .lead{color:var(--muted);font-size:1.06rem;max-width:52ch;margin-top:14px;text-wrap:pretty}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(1100px 520px at 82% -10%, #dce7f6 0%, transparent 60%),
+      linear-gradient(180deg,#f3f7fc 0%, var(--bg) 100%);
+    border-bottom:1px solid var(--line);
+  }
+  .hero__grid{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;
+    padding:78px 0 84px;
+  }
+  .hero__brand{display:flex;align-items:baseline;flex-wrap:wrap;gap:10px}
+  .hero__brand-name{
+    font-size:clamp(1.5rem,2.8vw,2rem);font-weight:800;letter-spacing:-.04em;
+    color:var(--brand-deep);line-height:1.1;
+  }
+  .hero__brand-tag{
+    font-size:.82rem;font-weight:700;letter-spacing:.02em;color:var(--teal-deep);
+    background:var(--brand-soft);padding:5px 12px;border-radius:100px;
+  }
+  .hero h1{
+    font-size:clamp(2.3rem,5.4vw,3.7rem);font-weight:800;line-height:1.12;letter-spacing:-.045em;
+    margin:16px 0 20px;color:var(--ink);
+  }
+  .hero h1 .hl{color:var(--brand);position:relative;white-space:nowrap}
+  .hero p.sub{font-size:1.12rem;color:var(--ink-soft);max-width:44ch;text-wrap:pretty}
+  .hero__cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+  .hero__hours{display:flex;align-items:center;gap:8px;margin-top:16px;font-size:.92rem;color:var(--muted);font-weight:600}
+  .dot-live{width:8px;height:8px;border-radius:50%;background:#2fb579;flex-shrink:0}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:14px 24px;border-radius:13px;font-weight:700;font-size:1rem;
+    transition:transform .15s,background .18s,box-shadow .18s;
+  }
+  .btn--primary{background:var(--brand);color:#fff;box-shadow:0 12px 26px -12px rgba(15,133,122,.7)}
+  .btn--primary:hover{background:var(--brand-deep);transform:translateY(-2px)}
+  .btn--ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+  .btn--ghost:hover{border-color:var(--brand);color:var(--brand-deep);transform:translateY(-2px)}
+
+  .hero__stats{display:flex;gap:30px;margin-top:32px;padding-top:28px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .stat b{display:block;font-size:1.7rem;font-weight:800;color:var(--brand-deep);letter-spacing:-.03em}
+  .stat span{font-size:.9rem;color:var(--muted);font-weight:500}
+
+  /* Goniometer signature */
+  /* ---------- HERO 대표 진료 카드 ---------- */
+  .hero-feature{width:100%;max-width:430px;justify-self:center;display:grid;gap:14px}
+  .feat-lead{font-size:.82rem;font-weight:800;letter-spacing:.14em;color:var(--teal-deep);text-transform:uppercase;padding-left:2px}
+  .feat-hero{position:relative;overflow:hidden;border-radius:22px;padding:26px 24px;
+    background:linear-gradient(140deg,#1a4a8f 0%,#123566 100%);box-shadow:var(--shadow)}
+  .feat-hero::after{content:"";position:absolute;right:-46px;bottom:-56px;width:190px;height:190px;
+    border-radius:50%;border:26px solid rgba(12,147,154,.22)}
+  .feat-hero__badge{display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;
+    font-size:.76rem;font-weight:800;letter-spacing:.02em;padding:6px 13px;border-radius:100px;margin-bottom:16px;position:relative}
+  .feat-hero__row{display:flex;gap:16px;align-items:center;position:relative}
+  .feat-hero__ico{width:58px;height:58px;flex-shrink:0;border-radius:16px;background:rgba(255,255,255,.14);
+    display:grid;place-items:center;color:#fff}
+  .feat-hero__row h3{color:#fff;font-size:1.4rem;font-weight:800;letter-spacing:-.03em;line-height:1.2}
+  .feat-hero__row p{color:#c3d6ef;font-size:.92rem;margin-top:4px}
+  .feat-tiles{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .feat-tile{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow-sm)}
+  .feat-tile__ico{width:44px;height:44px;border-radius:12px;background:var(--brand-soft);
+    display:grid;place-items:center;color:var(--brand-deep);margin-bottom:12px}
+  .feat-tile b{display:block;font-size:1.05rem;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+  .feat-tile span{display:block;font-size:.85rem;color:var(--muted);margin-top:3px}
+
+  /* ---------- HIGHLIGHT CARDS ---------- */
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:8px}
+  .card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px 22px;transition:transform .2s,box-shadow .2s,border-color .2s;cursor:pointer;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--brand-soft)}
+  .card__ico{width:46px;height:46px;border-radius:13px;background:var(--brand-soft);
+    display:grid;place-items:center;color:var(--brand-deep);margin-bottom:16px}
+  .card h3{font-size:1.12rem;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+  .card p{font-size:.94rem;color:var(--muted);text-wrap:pretty}
+  .card__more{margin-top:14px;font-size:.86rem;font-weight:700;color:var(--brand);display:inline-flex;gap:5px;align-items:center}
+
+  /* ---------- DOCTORS ---------- */
+  .doc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:44px;max-width:820px}
+  .doc{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;box-shadow:var(--shadow-sm);
+  }
+  .doc__photo{
+    height:200px;position:relative;display:grid;place-items:center;
+    background:linear-gradient(150deg,var(--brand) 0%,var(--brand-deep) 100%);
+  }
+  .doc__photo .initial{font-size:3.4rem;font-weight:800;color:rgba(255,255,255,.92)}
+  .doc__photo::after{content:"";position:absolute;inset:0;
+    background:radial-gradient(120px 120px at 82% 18%,rgba(255,255,255,.18),transparent)}
+  .doc__body{padding:24px}
+  .doc__spec{font-size:.82rem;font-weight:700;color:var(--brand);letter-spacing:.03em}
+  .doc__name{font-size:1.3rem;font-weight:800;margin:5px 0 3px;letter-spacing:-.02em}
+  .doc__name span{font-size:.92rem;font-weight:600;color:var(--muted);margin-left:6px}
+  .doc__tags{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 16px}
+  .tag{font-size:.8rem;font-weight:600;color:var(--brand-deep);background:var(--brand-soft);padding:5px 11px;border-radius:8px}
+  .doc__cv{list-style:none;display:grid;gap:8px}
+  .doc__cv li{font-size:.9rem;color:var(--ink-soft);padding-left:18px;position:relative}
+  .doc__cv li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:50%;background:var(--mint)}
+
+  /* ---------- SERVICES ---------- */
+  .svc-dept{margin-top:44px}
+  .svc-dept + .svc-dept{margin-top:56px}
+  .svc-dept__head{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+  .svc-dept__badge{font-size:1rem;font-weight:800;letter-spacing:.02em;color:#fff;background:var(--brand);padding:10px 20px;border-radius:11px;white-space:nowrap}
+  .svc-dept__badge.alt{background:var(--teal)}
+  .svc-dept__head h3{font-size:1.5rem;font-weight:800;letter-spacing:-.03em}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .svc{
+    background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;
+    transition:transform .2s,box-shadow .2s;
+  }
+  .svc:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm)}
+  .svc__ico{width:42px;height:42px;border-radius:11px;background:var(--surface-2);border:1px solid var(--line);
+    display:grid;place-items:center;color:var(--brand-deep);margin-bottom:14px}
+  .svc h4{font-size:1.08rem;font-weight:800;margin-bottom:6px;letter-spacing:-.02em}
+  .svc p{font-size:.92rem;color:var(--muted);text-wrap:pretty}
+  .svc__note{display:flex;gap:8px;align-items:flex-start;margin-top:14px;padding-top:14px;
+    border-top:1px dashed var(--line);color:var(--teal-deep)!important;font-size:.88rem!important;font-weight:600;line-height:1.6}
+  .svc__note svg{flex-shrink:0;margin-top:3px}
+  .svc__note b{font-weight:800}
+  .inj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .inj-cat{font-size:1rem;font-weight:800;color:var(--ink);letter-spacing:-.02em;margin-bottom:12px;
+    padding-left:12px;border-left:3px solid var(--teal)}
+  .inj-tags{display:flex;flex-wrap:wrap;gap:8px}
+  .inj-tags .tag{font-size:.86rem;padding:7px 13px}
+  @media(max-width:760px){.inj-grid{grid-template-columns:1fr;gap:22px}}
+
+  /* ---------- LOCATION ---------- */
+  .loc-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:32px;margin-top:44px;align-items:stretch}
+  .map{
+    border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);
+    background:var(--surface);box-shadow:var(--shadow-sm);position:relative;
+  }
+  /* 카카오맵 약도를 영역 폭에 맞게 늘리기 */
+  .map .root_daum_roughmap{width:100%!important;border:0!important}
+  .map .root_daum_roughmap .wrap_map{height:420px!important;width:100%!important}
+  .map .root_daum_roughmap .map_border{border:0!important;border-top:1px solid var(--line)!important}
+  .map__links{position:absolute;right:16px;top:16px;display:flex;gap:8px;z-index:2}
+  .map__links a{background:rgba(255,255,255,.95);border:1px solid var(--line);padding:8px 13px;border-radius:9px;
+    font-size:.84rem;font-weight:700;color:var(--ink-soft);box-shadow:var(--shadow-sm);transition:.15s}
+  .map__links a:hover{color:var(--brand-deep);transform:translateY(-1px)}
+  .info{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow-sm)}
+  .info__row{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .info__row:last-child{border-bottom:none;padding-bottom:0}
+  .info__row:first-child{padding-top:0}
+  .info__ico{width:38px;height:38px;flex-shrink:0;border-radius:11px;background:var(--brand-soft);
+    display:grid;place-items:center;color:var(--brand-deep)}
+  .info__k{font-size:.82rem;font-weight:700;color:var(--muted);letter-spacing:.02em}
+  .info__v{font-size:1rem;font-weight:600;color:var(--ink);margin-top:2px}
+  .info__v small{display:block;font-weight:500;color:var(--muted);font-size:.88rem;margin-top:2px}
+  .hours{display:grid;gap:5px;margin-top:4px}
+  .hours div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:.94rem}
+  .hours div span:last-child{flex-shrink:0;white-space:nowrap}
+  .hours .off{color:var(--accent);font-weight:700}
+
+  /* ---------- VIDEOS ---------- */
+  .vid-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+  .vid{
+    background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    cursor:pointer;transition:transform .2s,box-shadow .2s;text-align:left;width:100%;
+  }
+  .vid:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+  .vid__thumb{aspect-ratio:16/9;position:relative;display:grid;place-items:center;overflow:hidden;
+    background:linear-gradient(140deg,#1a4a8f,#0c939a)}
+  .vid__thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  .vid__thumb::after{content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg,rgba(9,20,40,.05) 40%,rgba(9,20,40,.42))}
+  .vid__play{width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.94);
+    display:grid;place-items:center;z-index:2;transition:transform .2s;box-shadow:0 8px 20px -8px rgba(0,0,0,.5)}
+  .vid:hover .vid__play{transform:scale(1.08)}
+  .vid__play svg{margin-left:3px}
+  .vid__dur{position:absolute;right:10px;bottom:10px;z-index:2;background:rgba(9,20,40,.85);color:#fff;
+    font-size:.76rem;font-weight:700;padding:3px 8px;border-radius:6px}
+  .vid__body{padding:18px 20px 22px}
+  .vid__cat{font-size:.78rem;font-weight:700;color:var(--brand);letter-spacing:.03em}
+  .vid__body h4{font-size:1.05rem;font-weight:800;margin:6px 0 6px;letter-spacing:-.02em;line-height:1.35}
+  .vid__body p{font-size:.9rem;color:var(--muted);text-wrap:pretty}
+  .yt-cta{margin-top:40px;display:flex;justify-content:center}
+
+  /* Video modal */
+  .modal{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:24px;
+    background:rgba(8,24,22,.72);backdrop-filter:blur(4px)}
+  .modal.is-open{display:grid}
+  .modal__box{width:min(880px,100%);background:#0b1626;border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+  .modal__head{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;color:#fff}
+  .modal__head b{font-size:1rem;font-weight:700}
+  .modal__actions{display:flex;align-items:center;gap:8px}
+  .modal__yt{display:inline-flex;align-items:center;gap:6px;font-size:.84rem;font-weight:700;color:#fff;
+    background:rgba(255,255,255,.14);padding:8px 13px;border-radius:9px;transition:background .15s}
+  .modal__yt:hover{background:rgba(255,255,255,.26)}
+  .modal__close{width:36px;height:36px;border-radius:10px;color:#fff;background:rgba(255,255,255,.12);display:grid;place-items:center;font-size:1.2rem}
+  .modal__close:hover{background:rgba(255,255,255,.24)}
+  .modal__video{aspect-ratio:16/9;background:#000;display:grid;place-items:center}
+  .modal__video iframe{width:100%;height:100%;border:0}
+  .modal__empty{color:#9fb4d0;text-align:center;padding:40px;font-size:.96rem;line-height:1.7}
+  .modal__empty code{background:rgba(255,255,255,.1);padding:2px 7px;border-radius:5px;color:#fff}
+
+  /* ---------- CTA STRIP ---------- */
+  .strip{background:linear-gradient(135deg,var(--brand-deep),#083f39);border-radius:26px;
+    padding:52px 44px;display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;
+    position:relative;overflow:hidden;margin-top:20px}
+  .strip::before{content:"";position:absolute;right:-40px;top:-60px;width:280px;height:280px;border-radius:50%;
+    border:40px solid rgba(120,200,205,.16)}
+  .strip h3{color:#fff;font-size:1.7rem;font-weight:800;letter-spacing:-.03em;position:relative}
+  .strip p{color:#bfe3dc;margin-top:8px;position:relative}
+  .strip .btn--primary{background:#fff;color:var(--brand-deep)}
+  .strip .btn--primary:hover{background:var(--brand-soft)}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:#a9c4c1;padding:56px 0 34px;margin-top:70px}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px}
+  .foot-brand .brand__name{color:#fff}
+  .foot-brand p{margin-top:14px;font-size:.92rem;line-height:1.8;max-width:34ch}
+  .foot-col h5{color:#fff;font-size:.92rem;font-weight:700;margin-bottom:14px}
+  .foot-col a,.foot-col p{display:block;font-size:.92rem;color:#a9c4c1;margin-bottom:9px;transition:.15s}
+  .foot-col .foot-room{color:var(--mint);font-weight:800;font-size:.8rem;letter-spacing:.06em;margin-top:14px;margin-bottom:6px}
+  .foot-col .foot-hour{padding-left:12px;border-left:2px solid rgba(255,255,255,.16);margin-bottom:5px}
+  .foot-col .foot-note{margin-top:15px;margin-bottom:6px}
+  .foot-col a:hover{color:var(--mint)}
+  .foot-bar{border-top:1px solid rgba(255,255,255,.12);margin-top:38px;padding-top:22px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.84rem;color:#7d9c98}
+
+  /* ---------- 전화번호 토스트 ---------- */
+  .toast{
+    position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);z-index:120;
+    display:flex;align-items:center;gap:11px;
+    background:var(--ink);color:#fff;padding:14px 20px;border-radius:14px;
+    box-shadow:0 20px 44px -18px rgba(9,20,40,.7);
+    opacity:0;visibility:hidden;transition:opacity .22s,transform .22s,visibility .22s;
+  }
+  .toast.is-open{opacity:1;visibility:visible;transform:translate(-50%,0)}
+  .toast b{display:block;font-size:1.12rem;font-weight:800;letter-spacing:-.01em}
+  .toast em{display:block;font-style:normal;font-size:.84rem;color:#9db4d4;margin-top:1px}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:900px){
+    .nav__links,.nav__cta{display:none}
+    .nav__toggle{display:block}
+    .nav.open .nav__links{
+      display:flex;flex-direction:column;position:absolute;top:var(--nav-h);left:0;right:0;
+      background:var(--surface);border-bottom:1px solid var(--line);padding:12px;gap:4px;box-shadow:var(--shadow)}
+    .nav.open .nav__link{padding:13px 15px}
+    .hero__grid{grid-template-columns:1fr;gap:34px;padding:52px 0 60px}
+    .hero-feature{order:-1;max-width:400px}
+    .cards{grid-template-columns:repeat(2,1fr)}
+    .doc-grid,.svc-grid,.vid-grid{grid-template-columns:1fr 1fr}
+    .loc-grid{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr}
+    .strip{padding:38px 28px}
+  }
+  @media(max-width:560px){
+    .section{padding:34px 0 52px}
+    .cards,.doc-grid,.svc-grid,.vid-grid{grid-template-columns:1fr}
+    .hero__stats{gap:22px}
+    .stat b{font-size:1.4rem}
+    .brand__logo{height:36px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;scroll-behavior:auto!important;transition:none!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="brand" href="#" data-nav="home" aria-label="만택루쎄의원 정형외과·재활의학과 홈">
+      <img class="brand__logo" src="data:image/png;base64,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" alt="만택루쎄의원 정형외과·재활의학과">
+    </a>
+
+    <nav class="nav__links" id="navLinks" aria-label="주요 메뉴">
+      <a class="nav__link" data-nav="home">홈</a>
+      <a class="nav__link" data-nav="doctors">의료진 소개</a>
+      <a class="nav__link" data-nav="services">진료 안내</a>
+      <a class="nav__link" data-nav="location">오시는 길</a>
+      <a class="nav__link" data-nav="videos">영상으로 보는 치료</a>
+    </nav>
+
+    <a class="nav__cta" href="tel:0245653333">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 5c0 8 7 15 15 15l2-4-5-2-2 2c-3-1-6-4-7-7l2-2-2-5-4 2z" fill="currentColor"/></svg>
+      진료 예약
+    </a>
+
+    <button class="nav__toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+<!-- ============ HOME ============ -->
+<section class="view is-active" data-view="home">
+  <div class="hero">
+    <div class="wrap">
+      <div class="hero__grid">
+        <div>
+          <div class="hero__brand">
+            <span class="hero__brand-name">만택루쎄의원</span>
+            <span class="hero__brand-tag">정형외과 · 재활의학과</span>
+          </div>
+          <h1>다시,<br><span class="hl">편안한 움직임</span>으로</h1>
+          <p class="sub">관절·척추 질환부터 통증·재활 치료까지. 정확한 진단과 꾸준한 관리로 일상의 움직임을 되찾아 드립니다.</p>
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="tel:0245653333">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 5c0 8 7 15 15 15l2-4-5-2-2 2c-3-1-6-4-7-7l2-2-2-5-4 2z" fill="currentColor"/></svg>
+              02-456-5333
+            </a>
+            <a class="btn btn--ghost" data-nav="services">진료 안내 보기 →</a>
+          </div>
+          <p class="hero__hours"><span class="dot-live"></span>평일 08:00 – 18:00 · 토요일 08:00 – 13:00</p>
+          <div class="hero__stats">
+            <div class="stat"><b>2개 진료과</b><span>정형외과 · 재활의학과</span></div>
+            <div class="stat"><b>진료실 2곳</b><span>노만택 · 소성욱 원장</span></div>
+            <div class="stat"><b>한·미 특허</b><span>방아쇠손가락 수술 기구</span></div>
+          </div>
+        </div>
+
+        <!-- 대표 진료 하이라이트 -->
+        <div class="hero-feature">
+          <div class="feat-lead">대표 진료</div>
+
+          <div class="feat-hero">
+            <span class="feat-hero__badge">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 7.7l5.4-.8L12 2z" fill="currentColor"/></svg>
+              한국 · 미국 특허
+            </span>
+            <div class="feat-hero__row">
+              <span class="feat-hero__ico">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V11m0-1V4.5a1.5 1.5 0 0 1 3 0V11m0-.5V6a1.5 1.5 0 0 1 3 0v7c0 3.5-2.2 6-5.5 6-2 0-3.3-.7-4.4-2.2l-2.2-3a1.5 1.5 0 0 1 2.4-1.8L8 14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <div>
+                <h3>방아쇠수지 증후군</h3>
+                <p>특허 수술 기구로 손가락 통증을 정밀하게 치료</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="feat-tiles">
+            <div class="feat-tile">
+              <span class="feat-tile__ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="18" rx="2" stroke="currentColor" stroke-width="2"/><rect x="3" y="9" width="18" height="6" rx="2" stroke="currentColor" stroke-width="2"/></svg></span>
+              <b>외상 치료</b>
+              <span>골절 · 상처 · 스포츠 손상</span>
+            </div>
+            <div class="feat-tile">
+              <span class="feat-tile__ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M14 4l6 6M17 7l-9.5 9.5L4 20l.5-3.5L14 7l3 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 8l3 3M8 10l2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+              <b>주사 치료</b>
+              <span>프롤로 · PRP · DNA · 영양수액</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- quick nav cards -->
+  <div class="wrap section" style="padding-top:52px">
+    <span class="eyebrow">진료 안내</span>
+    <h2 class="h-sec">무엇을 도와드릴까요?</h2>
+    <div class="cards" style="margin-top:34px">
+      <button class="card" data-nav="doctors">
+        <div class="card__ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <h3>의료진 소개</h3>
+        <p>정형외과·재활의학과 전문의를 만나보세요.</p>
+        <span class="card__more">자세히 →</span>
+      </button>
+      <button class="card" data-nav="services">
+        <div class="card__ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="6" y="6" width="12" height="12" rx="3" stroke="currentColor" stroke-width="2"/></svg></div>
+        <h3>진료 안내</h3>
+        <p>관절·척추·통증·재활 치료 프로그램.</p>
+        <span class="card__more">자세히 →</span>
+      </button>
+      <button class="card" data-nav="location">
+        <div class="card__ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.6" stroke="currentColor" stroke-width="2"/></svg></div>
+        <h3>오시는 길</h3>
+        <p>위치·주차·진료시간을 확인하세요.</p>
+        <span class="card__more">자세히 →</span>
+      </button>
+      <button class="card" data-nav="videos">
+        <div class="card__ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="4" stroke="currentColor" stroke-width="2"/><path d="M10 9l5 3-5 3V9z" fill="currentColor"/></svg></div>
+        <h3>영상으로 보는 치료</h3>
+        <p>치료 과정을 영상으로 확인하세요.</p>
+        <span class="card__more">자세히 →</span>
+      </button>
+    </div>
+
+    <div class="strip" style="margin-top:56px">
+      <div>
+        <h3>몸이 보내는 신호, 미루지 마세요</h3>
+        <p>전화 한 통으로 편하게 예약하실 수 있습니다.</p>
+      </div>
+      <a class="btn btn--primary" href="tel:0245653333">지금 예약하기</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DOCTORS ============ -->
+<section class="view" data-view="doctors">
+  <div class="wrap section">
+    <span class="eyebrow">의료진 소개</span>
+    <h2 class="h-sec">환자 곁에서, 회복까지 함께합니다</h2>
+    <p class="lead">각 분야 전문의가 협진하여 진단부터 치료·재활까지 하나의 흐름으로 관리합니다.</p>
+
+    <div class="doc-grid">
+      <article class="doc">
+        <div class="doc__photo"><span class="initial">노</span></div>
+        <div class="doc__body">
+          <div class="doc__spec">1번 진료실 · 대표원장</div>
+          <div class="doc__name">노만택 <span>원장</span></div>
+          <div class="doc__tags"><span class="tag">스포츠의학</span><span class="tag">방아쇠손가락</span><span class="tag">관절·통증</span></div>
+          <ul class="doc__cv">
+            <li>전) 경기대학교 스포츠과학대학원 교수</li>
+            <li>전) 한국체육대학교 겸임교수</li>
+            <li>전) 한국미용성형학회 회장</li>
+            <li>방아쇠손가락 수술 기구 한국·미국 특허 소유</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="doc">
+        <div class="doc__photo"><span class="initial">소</span></div>
+        <div class="doc__body">
+          <div class="doc__spec">2번 진료실 · 원장</div>
+          <div class="doc__name">소성욱 <span>원장</span></div>
+          <div class="doc__tags"><span class="tag">정형외과</span><span class="tag">재활의학과</span></div>
+          <ul class="doc__cv">
+            <li>진료일: 월 · 목 · 금 (09:30 – 18:00)</li>
+            <li>학력 · 경력 정보 준비 중</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+
+    <div class="strip" style="margin-top:56px">
+      <div>
+        <h3>어느 과로 가야 할지 모르시겠나요?</h3>
+        <p>증상을 말씀해 주시면 적합한 진료과로 안내해 드립니다.</p>
+      </div>
+      <a class="btn btn--primary" href="tel:0245653333">전화로 문의하기</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="view" data-view="services">
+  <div class="wrap section">
+    <span class="eyebrow">진료 안내</span>
+    <h2 class="h-sec">정확한 진단, 단계별 맞춤 치료</h2>
+    <p class="lead">정형외과와 재활의학과 진료를 함께 제공하며, 정확한 진단부터 통증 치료·재활까지 이어갑니다.</p>
+
+    <!-- 진료 항목 -->
+    <div class="svc-dept">
+      <div class="svc-dept__head">
+        <span class="svc-dept__badge">정형외과 · 재활의학과</span>
+        <h3>이런 증상을 진료합니다</h3>
+      </div>
+      <div class="svc-grid">
+        <div class="svc">
+          <div class="svc__ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 14l6-6 4 4 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h4>외상 및 스포츠 손상</h4>
+          <p>운동 중 부상, 인대·근육 손상, 타박·상처 등 외상 진단과 치료.</p>
+          <p class="svc__note">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span>다친 후 <b>24시간 이내</b>에 방문하시면 빠른 치료 결과를 기대하실 수 있습니다.</span>
+          </p>
+        </div>
+        <div class="svc">
+          <div class="svc__ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/></svg></div>
+          <h4>어깨 관절 질환</h4>
+          <p>오십견, 회전근개 손상, 어깨 통증과 가동범위 저하 치료.</p>
+        </div>
+        <div class="svc">
+          <div class="svc__ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3v18" stroke="currentColor" stroke-width="2"/><path d="M9 6h6M8 10h8M9 14h6M10 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <h4>허리 및 척추 질환</h4>
+          <p>목·허리 디스크, 척추관 협착증, 만성 요통과 자세 이상.</p>
+        </div>
+        <div class="svc">
+          <div class="svc__ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 8v4l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <h4>관절염 및 염좌</h4>
+          <p>퇴행성 관절염, 발목·무릎 염좌 등 관절 통증 관리.</p>
+        </div>
+        <div class="svc">
+          <div class="svc__ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 18L18 6M9 6h9v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h4>방아쇠손가락 수술</h4>
+          <p>한국·미국 특허 수술 기구를 활용한 방아쇠수지 치료.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 특수 주사 요법 -->
+    <div class="svc-dept">
+      <div class="svc-dept__head">
+        <span class="svc-dept__badge alt">특수 주사 요법</span>
+        <h3>증상과 목적에 맞춘 주사 치료</h3>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow-sm)">
+        <div class="inj-grid">
+          <div>
+            <div class="inj-cat">통증 · 재생 치료</div>
+            <div class="inj-tags">
+              <span class="tag">프롤로 주사</span><span class="tag">신경 치료</span>
+              <span class="tag">DNA(연어) 주사</span><span class="tag">PRP 주사</span>
+            </div>
+          </div>
+          <div>
+            <div class="inj-cat">영양 수액</div>
+            <div class="inj-tags">
+              <span class="tag">황제 수액</span><span class="tag">태반 주사</span><span class="tag">비타민 주사</span>
+            </div>
+          </div>
+          <div>
+            <div class="inj-cat">미용 · 면역</div>
+            <div class="inj-tags">
+              <span class="tag">보톡스</span><span class="tag">싸이모신(면역) 주사</span>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top:22px;padding-top:18px;border-top:1px dashed var(--line);font-size:.9rem;color:var(--muted)">
+          주사 치료는 개인의 증상과 상태에 따라 적용 여부와 방법이 달라집니다. 진료 시 상담해 드립니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOCATION ============ -->
+<section class="view" data-view="location">
+  <div class="wrap section">
+    <span class="eyebrow">오시는 길</span>
+    <h2 class="h-sec">찾아오시기 편한 곳에 있습니다</h2>
+    <p class="lead">지하철·버스 이용이 편리하며 건물 내 주차가 가능합니다.</p>
+
+    <div class="loc-grid">
+      <div class="map">
+        <!-- 카카오맵 약도 (실행 스크립트는 페이지 하단에 있습니다) -->
+        <div id="daumRoughmapContainer1784772094946" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+        <div class="map__links">
+          <a href="https://map.kakao.com/?q=만택루쎄의원" target="_blank" rel="noopener">카카오맵</a>
+          <a href="https://map.naver.com/p/search/만택루쎄의원" target="_blank" rel="noopener">네이버지도</a>
+        </div>
+      </div>
+
+      <div class="info">
+        <div class="info__row">
+          <div class="info__ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="2"/></svg></div>
+          <div><div class="info__k">주소</div><div class="info__v">서울 광진구 광나루로 614, 6층<br>만택루쎄의원</div></div>
+        </div>
+        <div class="info__row">
+          <div class="info__ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 5c0 8 7 15 15 15l2-4-5-2-2 2c-3-1-6-4-7-7l2-2-2-5-4 2z" fill="currentColor"/></svg></div>
+          <div><div class="info__k">대표전화</div><div class="info__v"><a href="tel:0245653333" style="color:var(--brand-deep)">02-456-5333</a></div></div>
+        </div>
+        <div class="info__row">
+          <div class="info__ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="12" rx="3" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="18" r="2" fill="currentColor"/><circle cx="16" cy="18" r="2" fill="currentColor"/></svg></div>
+          <div><div class="info__k">교통 · 주차</div><div class="info__v">지하철 2호선 강변역 1번 출구 도보 10분<small>건물 주차장 이용 가능</small></div></div>
+        </div>
+        <div class="info__row">
+          <div class="info__ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <div style="flex:1">
+            <div class="info__k">진료시간</div>
+            <div style="margin-top:10px">
+              <div style="font-weight:800;color:var(--brand-deep);font-size:.92rem;margin-bottom:5px">1번 진료실 · 노만택 원장</div>
+              <div class="hours">
+                <div><span>월 – 금</span><span>08:00 – 18:00</span></div>
+                <div><span>토요일</span><span>08:00 – 13:00</span></div>
+                <div><span>일요일 · 공휴일</span><span class="off">휴진</span></div>
+              </div>
+            </div>
+            <div style="margin-top:16px">
+              <div style="font-weight:800;color:var(--brand-deep);font-size:.92rem;margin-bottom:5px">2번 진료실 · 소성욱 원장</div>
+              <div class="hours">
+                <div><span>월 · 목 · 금</span><span>09:30 – 18:00</span></div>
+                <div><span>화 · 수 · 토 · 일 · 공휴일</span><span class="off">휴진</span></div>
+              </div>
+            </div>
+            <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);font-size:.88rem;color:var(--muted);line-height:1.8">
+              점심시간 13:00 – 14:00<br>진료 종료 1시간 전 접수 마감
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VIDEOS ============ -->
+<section class="view" data-view="videos">
+  <div class="wrap section">
+    <span class="eyebrow">영상으로 보는 치료</span>
+    <h2 class="h-sec">눈으로 보면 더 쉽게 이해됩니다</h2>
+    <p class="lead">손가락이 걸리거나 딸깍거리는 증상, 어떤 치료를 받게 되는지 영상으로 확인해 보세요. 카드를 누르면 바로 재생됩니다.</p>
+
+    <div class="vid-grid" id="vidGrid">
+      <button class="vid" data-video-id="4XhQsPFDfsY" data-title="방아쇠수지 증후군 설명">
+        <div class="vid__thumb"><img src="https://img.youtube.com/vi/4XhQsPFDfsY/hqdefault.jpg" alt="" loading="lazy"><span class="vid__play"><svg width="20" height="20" viewBox="0 0 24 24" fill="#123566"><path d="M8 5v14l11-7z"/></svg></span></div>
+        <div class="vid__body"><div class="vid__cat">질환 이해</div><h4>방아쇠수지 증후군 설명</h4><p>왜 손가락이 걸리는지, 원인과 증상을 알기 쉽게 설명합니다.</p></div>
+      </button>
+      <button class="vid" data-video-id="job5rXbac0Q" data-title="방아쇠수지 증후군 설명">
+        <div class="vid__thumb"><img src="https://img.youtube.com/vi/job5rXbac0Q/hqdefault.jpg" alt="" loading="lazy"><span class="vid__play"><svg width="20" height="20" viewBox="0 0 24 24" fill="#123566"><path d="M8 5v14l11-7z"/></svg></span></div>
+        <div class="vid__body"><div class="vid__cat">질환 이해</div><h4>방아쇠수지 증후군 설명</h4><p>어떤 경우에 치료가 필요한지 함께 살펴봅니다.</p></div>
+      </button>
+      <button class="vid" data-video-id="Ra2qB9kWglY" data-title="방아쇠수지 증후군 실제 시술 영상">
+        <div class="vid__thumb"><img src="https://img.youtube.com/vi/Ra2qB9kWglY/hqdefault.jpg" alt="" loading="lazy"><span class="vid__play"><svg width="20" height="20" viewBox="0 0 24 24" fill="#123566"><path d="M8 5v14l11-7z"/></svg></span><span class="vid__dur">Shorts</span></div>
+        <div class="vid__body"><div class="vid__cat">시술 과정</div><h4>방아쇠수지 증후군 실제 시술 영상</h4><p>특허 기구를 이용한 실제 시술 과정을 담았습니다.</p></div>
+      </button>
+    </div>
+
+    <div class="yt-cta">
+      <a class="btn btn--primary" href="https://www.youtube.com/@luceclinic" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.7-.5-5.5a3 3 0 0 0-2-2C18.5 4 12 4 12 4s-6.5 0-8.5.5a3 3 0 0 0-2 2C1 8.3 1 12 1 12s0 3.7.5 5.5a3 3 0 0 0 2 2C5.5 20 12 20 12 20s6.5 0 8.5-.5a3 3 0 0 0 2-2C23 15.7 23 12 23 12zM10 15V9l5 3-5 3z"/></svg>
+        유튜브 채널 바로가기
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ VIDEO MODAL ============ -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="영상 재생">
+  <div class="modal__box">
+    <div class="modal__head">
+      <b id="modalTitle">영상</b>
+      <div class="modal__actions">
+        <a class="modal__yt" id="modalYt" href="#" target="_blank" rel="noopener">유튜브에서 보기</a>
+        <button class="modal__close" id="modalClose" aria-label="닫기">✕</button>
+      </div>
+    </div>
+    <div class="modal__video" id="modalVideo"></div>
+  </div>
+</div>
+
+<!-- ============ 전화번호 안내 토스트 (PC용) ============ -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5c0 8 7 15 15 15l2-4-5-2-2 2c-3-1-6-4-7-7l2-2-2-5-4 2z" fill="currentColor"/></svg>
+  <span><b>02-456-5333</b><em id="toastMsg">번호가 복사되었습니다</em></span>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="foot-logo"><img src="data:image/png;base64,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" alt="만택루쎄의원 정형외과·재활의학과"></div>
+        <p>정확한 진단과 꾸준한 관리로 일상의 편안한 움직임을 되찾아 드립니다.</p>
+      </div>
+      <div class="foot-col">
+        <h5>바로가기</h5>
+        <a data-nav="doctors">의료진 소개</a>
+        <a data-nav="services">진료 안내</a>
+        <a data-nav="location">오시는 길</a>
+        <a data-nav="videos">영상으로 보는 치료</a>
+      </div>
+      <div class="foot-col">
+        <h5>진료 안내</h5>
+        <p class="foot-room">1진료실</p>
+        <p class="foot-hour">평일 08:00 – 18:00</p>
+        <p class="foot-hour">토요일 08:00 – 13:00</p>
+        <p class="foot-room">2진료실</p>
+        <p class="foot-hour">월 · 목 · 금 09:30 – 18:00</p>
+        <p class="foot-note">점심시간 13:00 – 14:00</p>
+        <p style="color:#e0a13c">일요일 · 공휴일 휴진</p>
+      </div>
+    </div>
+    <div class="foot-bar">
+      <span>© 2026 만택루쎄의원 정형외과·재활의학과. All rights reserved.</span>
+      <span>대표전화 02-456-5333 · 서울 광진구 광나루로 614 6층</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+
+  /* ---- 페이지(뷰) 전환 ---- */
+  var views=document.querySelectorAll(".view");
+  var links=document.querySelectorAll(".nav__link");
+  function show(name){
+    var found=false;
+    views.forEach(function(v){
+      var on=v.getAttribute("data-view")===name;
+      v.classList.toggle("is-active",on);
+      if(on) found=true;
+    });
+    if(!found){ // fallback
+      document.querySelector('.view[data-view="home"]').classList.add("is-active");
+      name="home";
+    }
+    links.forEach(function(l){ l.classList.toggle("is-active", l.getAttribute("data-nav")===name); });
+    // 오시는 길 탭이 열릴 때 카카오맵을 그립니다(숨겨진 상태에서 그리면 크기가 0이 됩니다)
+    if(name==="location" && window.renderKakaoMap) window.renderKakaoMap();
+    window.scrollTo({top:0,behavior:"instant" in document.documentElement.style?"instant":"auto"});
+    closeMenu();
+  }
+  document.addEventListener("click",function(e){
+    var t=e.target.closest("[data-nav]");
+    if(!t) return;
+    e.preventDefault();
+    show(t.getAttribute("data-nav"));
+  });
+
+  /* ---- 모바일 메뉴 ---- */
+  var nav=document.getElementById("nav"), toggle=document.getElementById("navToggle");
+  function closeMenu(){ nav.classList.remove("open"); toggle.setAttribute("aria-expanded","false"); }
+  toggle.addEventListener("click",function(){
+    var open=nav.classList.toggle("open");
+    toggle.setAttribute("aria-expanded",open?"true":"false");
+  });
+
+  /* ---- 전화 버튼: 모바일은 바로 통화 연결, PC는 번호 안내 + 복사 ---- */
+  (function phoneFallback(){
+    var toast=document.getElementById("toast"),
+        toastMsg=document.getElementById("toastMsg"),
+        timer=null;
+    // 마우스를 쓰는 기기(PC)인지 판별
+    var isDesktop = window.matchMedia
+      && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if(!isDesktop) return;   // 모바일·태블릿은 기본 통화 연결 그대로 사용
+
+    function showToast(msg){
+      toastMsg.textContent=msg;
+      toast.classList.add("is-open");
+      clearTimeout(timer);
+      timer=setTimeout(function(){ toast.classList.remove("is-open"); },3200);
+    }
+
+    document.addEventListener("click",function(e){
+      var a=e.target.closest('a[href^="tel:"]'); if(!a) return;
+      var num="02-456-5333";
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(num).then(
+          function(){ showToast("번호가 복사되었습니다"); },
+          function(){ showToast("전화로 예약해 주세요"); }
+        );
+      }else{
+        showToast("전화로 예약해 주세요");
+      }
+    });
+  })();
+
+  /* ---- 영상 모달 ---- */
+  var modal=document.getElementById("modal"),
+      modalVideo=document.getElementById("modalVideo"),
+      modalTitle=document.getElementById("modalTitle"),
+      modalClose=document.getElementById("modalClose"),
+      modalYt=document.getElementById("modalYt");
+
+  /* 로컬 파일(file://)에서는 유튜브가 페이지 출처를 확인할 수 없어
+     "오류 153"이 발생합니다. 이 경우 임베드 대신 바로가기를 안내합니다.
+     실제 서버(https://도메인)에 올리면 정상 재생됩니다. */
+  var canEmbed = (location.protocol==="http:"||location.protocol==="https:");
+
+  document.getElementById("vidGrid").addEventListener("click",function(e){
+    var card=e.target.closest(".vid"); if(!card) return;
+    var id=card.getAttribute("data-video-id");
+    var watchUrl="https://www.youtube.com/watch?v="+id;
+    modalTitle.textContent=card.getAttribute("data-title")||"영상";
+    modalYt.href = id ? watchUrl : "https://www.youtube.com/@luceclinic";
+
+    if(id && canEmbed){
+      var src="https://www.youtube.com/embed/"+id
+            +"?autoplay=1&rel=0&playsinline=1&modestbranding=1"
+            +"&origin="+encodeURIComponent(location.origin);
+      modalVideo.innerHTML='<iframe src="'+src+'" title="유튜브 영상" '
+        +'allow="autoplay; encrypted-media; picture-in-picture; fullscreen" '
+        +'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+    }else if(id){
+      modalVideo.innerHTML='<div class="modal__empty">'
+        +'현재 파일을 컴퓨터에서 직접 열어 보고 계셔서, 유튜브가 재생을 제한하고 있습니다.<br>'
+        +'홈페이지 주소(https://)로 접속하면 이 화면에서 바로 재생됩니다.<br><br>'
+        +'<a class="modal__yt" href="'+watchUrl+'" target="_blank" rel="noopener">유튜브에서 영상 보기 →</a>'
+        +'</div>';
+    }else{
+      modalVideo.innerHTML='<div class="modal__empty">준비 중인 영상입니다.</div>';
+    }
+    modal.classList.add("is-open");
+  });
+  function closeModal(){ modal.classList.remove("is-open"); modalVideo.innerHTML=""; }
+  modalClose.addEventListener("click",closeModal);
+  modal.addEventListener("click",function(e){ if(e.target===modal) closeModal(); });
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape"){ closeModal(); closeMenu(); } });
+})();
+</script>
+<!-- ============ 카카오맵 약도 스크립트 ============ -->
+<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+<script charset="UTF-8">
+(function(){
+  var done=false;
+  window.renderKakaoMap=function(){
+    if(done) return;
+    if(!(window.daum && daum.roughmap && daum.roughmap.Lander)) return; // 스크립트 로딩 전
+    done=true;
+    new daum.roughmap.Lander({
+      "timestamp":"1784772094946",
+      "key":"rp85d7uj9hm",
+      "mapWidth":"640",
+      "mapHeight":"420"
+    }).render();
+  };
+  // 페이지를 열자마자 '오시는 길'이 보이는 경우에도 대응
+  var loc=document.querySelector('.view[data-view="location"]');
+  if(loc && loc.classList.contains("is-active")) window.renderKakaoMap();
+})();
+</script>
+</body>
+</html>
