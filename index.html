@@ -145,8 +145,13 @@
   /* ---------- HERO 대표 진료 카드 ---------- */
   .hero-feature{width:100%;max-width:430px;justify-self:center;display:grid;gap:14px}
   .feat-lead{font-size:.82rem;font-weight:800;letter-spacing:.14em;color:var(--teal-deep);text-transform:uppercase;padding-left:2px}
-  .feat-hero{position:relative;overflow:hidden;border-radius:22px;padding:26px 24px;
-    background:linear-gradient(140deg,#1a4a8f 0%,#123566 100%);box-shadow:var(--shadow)}
+  .feat-hero{display:block;position:relative;overflow:hidden;border-radius:22px;padding:26px 24px;
+    background:linear-gradient(140deg,#1a4a8f 0%,#123566 100%);box-shadow:var(--shadow);
+    cursor:pointer;transition:transform .18s,box-shadow .18s}
+  .feat-hero:hover{transform:translateY(-3px);box-shadow:0 26px 52px -24px rgba(9,20,40,.6)}
+  .feat-hero__go{position:absolute;right:18px;top:18px;z-index:2;width:32px;height:32px;border-radius:50%;
+    background:rgba(255,255,255,.16);color:#fff;display:grid;place-items:center;transition:transform .18s,background .18s}
+  .feat-hero:hover .feat-hero__go{background:rgba(255,255,255,.28);transform:translateX(3px)}
   .feat-hero::after{content:"";position:absolute;right:-46px;bottom:-56px;width:190px;height:190px;
     border-radius:50%;border:26px solid rgba(12,147,154,.22)}
   .feat-hero__badge{display:inline-flex;align-items:center;gap:6px;background:var(--teal);color:#fff;
@@ -476,7 +481,8 @@
         <div class="hero-feature">
           <div class="feat-lead">대표 진료</div>
 
-          <div class="feat-hero">
+          <a class="feat-hero" data-nav="trigger" href="#" aria-label="방아쇠수지 증후군 자세히 보기">
+            <span class="feat-hero__go" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             <span class="feat-hero__badge">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L4.2 7.7l5.4-.8L12 2z" fill="currentColor"/></svg>
               한국 · 미국 특허
@@ -490,7 +496,7 @@
                 <p>특허 수술 기구로 손가락 통증을 정밀하게 치료</p>
               </div>
             </div>
-          </div>
+          </a>
 
           <div class="feat-tiles">
             <div class="feat-tile">
@@ -526,16 +532,16 @@
         <p>관절·척추·통증·재활 치료 프로그램.</p>
         <span class="card__more">자세히 →</span>
       </button>
-      <button class="card" data-nav="location">
-        <div class="card__ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.6" stroke="currentColor" stroke-width="2"/></svg></div>
-        <h3>오시는 길</h3>
-        <p>위치·주차·진료시간을 확인하세요.</p>
-        <span class="card__more">자세히 →</span>
-      </button>
       <button class="card" data-nav="videos">
         <div class="card__ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="4" stroke="currentColor" stroke-width="2"/><path d="M10 9l5 3-5 3V9z" fill="currentColor"/></svg></div>
         <h3>영상으로 보는 치료</h3>
         <p>치료 과정을 영상으로 확인하세요.</p>
+        <span class="card__more">자세히 →</span>
+      </button>
+      <button class="card" data-nav="location">
+        <div class="card__ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.6" stroke="currentColor" stroke-width="2"/></svg></div>
+        <h3>오시는 길</h3>
+        <p>위치·주차·진료시간을 확인하세요.</p>
         <span class="card__more">자세히 →</span>
       </button>
     </div>
