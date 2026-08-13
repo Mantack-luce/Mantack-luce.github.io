@@ -511,6 +511,33 @@
   .ev-pop__call{display:inline-flex;align-items:center;gap:7px;background:var(--brand);color:#fff;font-weight:700;
     padding:10px 18px;border-radius:11px;font-size:.96rem}
   .ev-pop__call:hover{background:var(--brand-deep)}
+
+  /* ---------- 휴진 안내 팝업 (텍스트형) ---------- */
+  .notice-pop .ev-pop__box{max-width:380px;background:var(--surface)}
+  .notice-pop__body{padding:30px 26px 22px;text-align:center}
+  .notice-pop__badge{display:inline-flex;align-items:center;gap:6px;background:#fbeecf;color:#a56a12;
+    font-size:.82rem;font-weight:800;letter-spacing:.02em;padding:6px 14px;border-radius:100px;margin-bottom:16px}
+  .notice-pop__badge::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
+  .notice-pop__title{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;line-height:1.28;color:var(--ink)}
+  .notice-pop__desc{margin-top:14px;font-size:1rem;color:var(--ink-soft);line-height:1.6}
+  .notice-pop__desc b{color:var(--brand-deep);font-weight:800}
+  .notice-pop__sub{margin-top:12px;font-size:.9rem;color:var(--muted);line-height:1.55}
+
+  /* 두 팝업 동시 노출: 데스크톱은 좌우로, 모바일은 위아래로 배치해 겹침 방지 */
+  .notice-pop{left:40px;right:auto;width:min(380px,calc(100vw - 60px))}
+  @media(max-width:640px){
+    /* 휴진 안내: 화면 상단에 고정(콘텐츠 높이만큼) */
+    .notice-pop{left:10px;right:10px;top:10px;bottom:auto;width:auto;max-height:44vh}
+    .notice-pop.is-open{display:block;align-items:initial;justify-content:initial}
+    .notice-pop .ev-pop__box{max-width:100%;width:auto;max-height:44vh}
+    .notice-pop__title{font-size:1.28rem}
+    .notice-pop__body{padding:24px 20px 16px}
+    /* 여름 이벤트: 화면 하단으로 내려 휴진 안내와 겹치지 않게 */
+    #evPop{top:auto;bottom:10px;max-height:50vh}
+    #evPop.is-open{align-items:flex-end}
+    #evPop .ev-pop__box{max-height:50vh}
+    #evPop .ev-pop__img{max-height:calc(50vh - 60px)}
+  }
   /* corner popup uses the compact landscape banner on all sizes */
 
 </style>
@@ -1091,6 +1118,26 @@
   </div>
 </div>
 
+<!-- ============ 휴진 안내 팝업 (8/20 1번 진료실 오전 휴진) ============ -->
+<div class="ev-pop notice-pop" id="noticePop" role="dialog" aria-modal="true" aria-label="휴진 안내">
+  <div class="ev-pop__box">
+    <button class="ev-pop__close" id="noticeClose" aria-label="닫기">✕</button>
+    <div class="notice-pop__body">
+      <span class="notice-pop__badge">휴진 안내</span>
+      <h3 class="notice-pop__title">8월 20일(목)<br>1번 진료실 오전 휴진</h3>
+      <p class="notice-pop__desc">8월 20일 목요일 <b>오전(08:00~13:00)</b>에는<br>1번 진료실 진료가 없습니다.</p>
+      <p class="notice-pop__sub">오후 진료와 2번 진료실은 정상 운영됩니다.<br>이용에 참고 부탁드립니다.</p>
+    </div>
+    <div class="ev-pop__bar">
+      <button class="ev-pop__hide" id="noticeHide">오늘 하루 보지 않기</button>
+      <a class="ev-pop__call" href="tel:024565333">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 5c0 8 7 15 15 15l2-4-5-2-2 2c-3-1-6-4-7-7l2-2-2-5-4 2z" fill="currentColor"/></svg>
+        02-456-5333 문의
+      </a>
+    </div>
+  </div>
+</div>
+
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="wrap">
@@ -1290,6 +1337,33 @@
   });
   var hb=document.getElementById('evBanner');
   if(hb) hb.addEventListener('click',function(e){e.preventDefault();open();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+})();
+</script>
+<script>
+/* ===== 휴진 안내 팝업: 지금부터 노출, 8월 20일 오후 6시(18:00)부터 자동으로 사라짐 =====
+   방문자 브라우저의 현재 시각을 기준으로 판단합니다. */
+(function(){
+  "use strict";
+  var pop=document.getElementById('noticePop'); if(!pop) return;
+  // 마감 시각: 2026년 8월 20일 18:00 (월은 0부터 시작하므로 7 = 8월)
+  var deadline = new Date(2026,7,20,18,0,0).getTime();
+  if(Date.now() >= deadline) return; // 마감 이후에는 팝업을 아예 노출하지 않음
+
+  var KEY='mantaek_notice_0820_hide';
+  function today(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
+  function open(){pop.classList.add('is-open');}
+  function close(){pop.classList.remove('is-open');}
+
+  var hidden=false;
+  try{hidden=(localStorage.getItem(KEY)===today());}catch(e){}
+  if(!hidden) setTimeout(open,700);
+
+  document.getElementById('noticeClose').addEventListener('click',close);
+  pop.addEventListener('click',function(e){if(e.target===pop)close();});
+  document.getElementById('noticeHide').addEventListener('click',function(){
+    try{localStorage.setItem(KEY,today());}catch(e){} close();
+  });
   document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
 })();
 </script>
