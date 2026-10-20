@@ -90,7 +90,7 @@
   .view.is-active{display:block}
   @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-  .section{padding:46px 0 76px}
+  .section{padding-top:46px;padding-bottom:76px}
   .eyebrow{
     display:inline-flex;align-items:center;gap:9px;
     font-size:1rem;font-weight:800;letter-spacing:.06em;color:var(--brand);
@@ -464,7 +464,7 @@
     .strip{padding:38px 28px}
   }
   @media(max-width:560px){
-    .section{padding:34px 0 52px}
+    .section{padding-top:34px;padding-bottom:52px}
     .cards,.doc-grid,.svc-grid,.vid-grid{grid-template-columns:1fr}
     .hero__stats{gap:22px}
     .stat b{font-size:1.4rem}
@@ -540,6 +540,29 @@
   }
   /* corner popup uses the compact landscape banner on all sizes */
 
+
+  /* ---- 비급여 항목표 ---- */
+  .fee-wrap{max-width:760px;margin-top:34px}
+  .fee-table{width:100%;border-collapse:separate;border-spacing:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);font-size:.97rem}
+  .fee-table thead th{background:var(--brand-deep);color:#fff;font-weight:700;text-align:left;padding:14px 22px;font-size:.92rem;letter-spacing:.02em}
+  .fee-table thead th:last-child{text-align:right}
+  .fee-table td{padding:13px 22px;border-top:1px solid var(--line);color:var(--ink-soft);vertical-align:top}
+  .fee-table .fee-price{text-align:right;font-weight:700;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .fee-table .fee-price small{display:block;font-weight:500;font-size:.8rem;color:var(--muted);margin-top:2px}
+  .fee-table .fee-cat th{background:var(--brand-soft);color:var(--brand-deep);text-align:left;font-weight:800;padding:11px 22px;border-top:1px solid var(--line);font-size:.92rem}
+  .fee-table tbody tr:not(.fee-cat):hover td{background:#f7f9fc}
+  .fee-note{margin-top:16px;font-size:.88rem;color:var(--muted);line-height:1.7}
+  .fee-note a{color:var(--brand-deep);font-weight:700}
+  @media(max-width:560px){
+    .fee-table{font-size:.92rem}
+    .fee-table td,.fee-table thead th,.fee-table .fee-cat th{padding-left:14px;padding-right:14px}
+  }
+  @media(min-width:901px) and (max-width:1180px){
+    .nav__inner{gap:16px}
+    .nav__link{padding:9px 10px;font-size:.9rem}
+  }
+  .nav__link,.nav__cta{white-space:nowrap}
+  @media(min-width:901px) and (max-width:1060px){.nav__cta{padding:10px 13px}.nav__links{gap:2px}.nav__link{padding:9px 8px;font-size:.86rem}}
 </style>
 </head>
 <body>
@@ -557,6 +580,7 @@
       <a class="nav__link" data-nav="services">진료 안내</a>
       <a class="nav__link" data-nav="trigger">방아쇠수지 증후군</a>
       <a class="nav__link" data-nav="videos">영상으로 보는 치료</a>
+      <a class="nav__link" data-nav="fees">비급여 항목</a>
       <a class="nav__link" data-nav="location">오시는 길</a>
     </nav>
 
@@ -1080,6 +1104,61 @@
     </div>
   </div>
 </section>
+
+<!-- ============ FEES (비급여 항목) ============ -->
+<section class="view" data-view="fees">
+  <div class="wrap section">
+    <span class="eyebrow">비급여 항목</span>
+    <h2 class="h-sec">비급여 진료비용 안내</h2>
+    <p class="lead">건강보험이 적용되지 않는 비급여 항목의 비용을 안내해 드립니다.</p>
+
+    <div class="fee-wrap">
+      <table class="fee-table">
+        <thead><tr><th scope="col">항목</th><th scope="col">금액</th></tr></thead>
+        <tbody>
+          <tr class="fee-cat"><th colspan="2" scope="rowgroup">제증명료</th></tr>
+          <tr><td>진단서(일반)</td><td class="fee-price">20,000원</td></tr>
+          <tr><td>진단서(건강)</td><td class="fee-price">20,000원</td></tr>
+          <tr><td>상해진단서(3주 미만)</td><td class="fee-price">100,000원</td></tr>
+          <tr><td>병무용 진단서</td><td class="fee-price">20,000원</td></tr>
+          <tr><td>상해진단서(3주 이상)</td><td class="fee-price">150,000원</td></tr>
+          <tr><td>영문 진단서</td><td class="fee-price">20,000원</td></tr>
+          <tr><td>진료기록지(1~5매)</td><td class="fee-price">1,000원</td></tr>
+          <tr><td>진료기록부(6매 이상)</td><td class="fee-price">1매당 100원</td></tr>
+          <tr><td>통원확인서</td><td class="fee-price">1,000원</td></tr>
+          <tr><td>후유장애진단서</td><td class="fee-price">100,000원</td></tr>
+          <tr><td>CD 복사</td><td class="fee-price">10,000원</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="fee-cat"><th colspan="2" scope="rowgroup">검사료</th></tr>
+          <tr><td>초음파</td><td class="fee-price">25,000원</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="fee-cat"><th colspan="2" scope="rowgroup">이학요법료</th></tr>
+          <tr><td>크라이오</td><td class="fee-price">20,000원</td></tr>
+          <tr><td>체외충격파</td><td class="fee-price">50,000원</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="fee-cat"><th colspan="2" scope="rowgroup">처치료</th></tr>
+          <tr><td>레이저를 이용한 손발톱 진균증 치료</td><td class="fee-price">120,000원</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="fee-cat"><th colspan="2" scope="rowgroup">예방접종료</th></tr>
+          <tr><td>조스타박스</td><td class="fee-price">170,000원</td></tr>
+          <tr><td>프리베나</td><td class="fee-price">130,000원</td></tr>
+          <tr><td>티디백신</td><td class="fee-price">30,000원</td></tr>
+        </tbody>
+        <tbody>
+          <tr class="fee-cat"><th colspan="2" scope="rowgroup">증식치료</th></tr>
+          <tr><td>프롤로(사지)</td><td class="fee-price">10,000원~<small>용량에 따라 금액 변동</small></td></tr>
+          <tr><td>프롤로(척추)</td><td class="fee-price">10,000원~<small>용량에 따라 금액 변동</small></td></tr>
+        </tbody>
+      </table>
+      <p class="fee-note">자세한 비용은 진료 내용에 따라 달라질 수 있습니다. 궁금하신 점은 <a href="tel:024565333">02-456-5333</a>으로 문의해 주세요.</p>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <!-- ============ VIDEO MODAL ============ -->
@@ -1152,6 +1231,7 @@
         <a data-nav="services">진료 안내</a>
         <a data-nav="trigger">방아쇠수지 클리닉</a>
         <a data-nav="videos">영상으로 보는 치료</a>
+        <a data-nav="fees">비급여 항목</a>
         <a data-nav="location">오시는 길</a>
       </div>
       <div class="foot-col">
@@ -1367,7 +1447,6 @@
   document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
 })();
 </script>
+<script data-goatcounter="https://mantack-luce.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
-<script data-goatcounter="https://mantack-luce.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
 </html>
